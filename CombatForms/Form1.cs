@@ -21,5 +21,30 @@ namespace CombatForms
         {
 
         }
+
+        private void richTextBox3_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void progressBar2_Click(object sender, EventArgs e)
+        {
+            progressBar2.Value = PlayerHealth;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           OnClick
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "Player";
+        }
     }
 }

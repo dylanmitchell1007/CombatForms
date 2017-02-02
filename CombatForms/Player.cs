@@ -11,8 +11,8 @@ namespace CombatForms
     {
         INIT,
         IDLE,
-        WALK,
-        RUN,
+        Attack,
+        Exit,
     }
 
 
@@ -39,8 +39,13 @@ namespace CombatForms
 
    
     
-    class Player : IDamageable
+
+
+
+
+    public class Player : IDamageable
     {
+     
         public Player(int Health, int Attack, string name)
         {
             name = null;
@@ -54,6 +59,13 @@ namespace CombatForms
         }
     }
 
+    class PlayerHealth
+    {
+        public PlayerHealth()
+        {
+            
+        }
+    }
 
     class Attack : IDamage
     {
