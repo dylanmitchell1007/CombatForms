@@ -31,6 +31,7 @@ namespace CombatForms
         {
             public Player()
             {
+                
                 onTalk = null;
                 hp = 100;
                 onDamaged += TakeDamage;

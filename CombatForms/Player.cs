@@ -35,26 +35,13 @@ namespace CombatForms
     {
         void GiveDamage();
 
-
     }
 
-    class Ninja : IDamageable
+   
+    
+    class Player : IDamageable
     {
-        public Ninja(int Health, int Attack, string name)
-        {
-            name = null;
-            Health = 100;
-            Attack = 15;
-        }
-
-        public void TakeDamage()
-        {
-            throw new NotImplementedException();
-        }
-    }
-    class Zombie : IDamageable
-    {
-        public Zombie(int Health, int Attack, string name)
+        public Player(int Health, int Attack, string name)
         {
             name = null;
             Health = 100;
