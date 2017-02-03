@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CombatForms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace CombatForms
 {
+
 
     public enum PlayerState
     {
@@ -26,85 +28,73 @@ namespace CombatForms
     /// </summary>
     public interface IDamageable
     {
-        void TakeDamage();
-    
+        void TakeDamage(int damage);
+
 
 
     }
     public interface IDamage
     {
-        void GiveDamage();
+        void GiveDamage(IDamageable something);
 
     }
 
-   
-    
 
 
-
-
-    public class Player : IDamageable
+    public class Player : IDamageable, IDamage
     {
-     
-        public Player(int Health, int Attack, string name)
+        //make these private
+        private int lifes;
+        private int attack;
+        private int health;
+        public float Lifes
+        {
+            get { return lifes; }
+        }
+
+        public float Attack
+        {
+            get { return attack; }
+        }
+        public float Health
+        {
+            get { return health; }
+        }
+
+        public Player(int Health, int Attack, int Lifes, string name)
         {
             name = null;
-            Health = 100;
-            Attack = 15;
+            health = Health;
+            attack = Attack;
+            lifes = Lifes;
+
         }
 
-        public void TakeDamage()
+
+        public void TakeDamage(int damage)
         {
-            throw new NotImplementedException();
+            health -= damage;
+            if(health<= 0)
+            {
+                lifes--;
+                health = 100;
+
+             }
+            if(lifes<= 0)
+            {
+                Console.WriteLine("YOU LOSE");
+            }
+        }
+
+        public void GiveDamage(IDamageable something)
+        {
+            something.TakeDamage(attack);
         }
     }
 
-    class PlayerHealth
-    {
-        public PlayerHealth()
-        {
-            
-        }
+        public delegate void OnDamaged<T>(T p);
     }
 
-    class Attack : IDamage
-    {
-
-        public Attack(int cost, int amount)
-        {
-            this.Cost = cost;
-            this.Amount = amount;
-
-        }
-        public int Amount
-        {
-            get
-            {
-                
-            }
-            set
-            {
-                Amount += Cost;
-            }
-        }
-        public int Cost
-        {
-            get
-            {
-
-            }
-            set
-            {
-
-            }
 
 
-        }
 
-        public void GiveDamage()
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-}

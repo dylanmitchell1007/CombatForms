@@ -6,34 +6,45 @@ using System.Threading.Tasks;
 
 namespace CombatForms
 {
-    class Ninja : IDamageable
+    
+    class Ninja : IDamageable, IDamage
     {
+        private int attack;
+        private int health;
+        public int Attack
+        {
+            get { return attack;}
+            set { attack = value; }
+        }
+        public int Health
+        {
+            get { return health; }
+            
+        }
+
         public Ninja(int Health, int Attack, string name)
         {
             name = null;
-            Health = 100;
-            Attack = 15;
+            health = Health;
+            attack = Attack;
+
         }
 
-        public void TakeDamage()
+        public void TakeDamage(int damage)
         {
-            throw new NotImplementedException();
+            health -= damage;
         }
-       public class Attack : IDamage
+
+        public void GiveDamage(IDamageable something)
         {
-            public Attack(int cost, int amount)
-            {
-                this.Cost = cost;
-                this.Amount = amount;
-            }
-            public int Amount { get; private set; }
-
-            public int Cost { get; private set; }
-
-            public void GiveDamage()
-            {
-                throw new NotImplementedException();
-            }
+            something.TakeDamage(attack);
         }
     }
 }
+
+
+
+
+
+
+
