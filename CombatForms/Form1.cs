@@ -106,11 +106,12 @@ namespace CombatForms
 
         }
 
-        public void Update()
+        public new void Update()
         {
-            richTextBox4.Text += "\n Lifes:" + p1.Lifes;
-
-            richTextBox4.Text += " \n Attack Log:" + p1.Attack;
+            richTextBox4.Text = "\n Lifes:" + p1.Lifes + "\n Attack: " + p1.Attack; 
+        
+            richTextBox5.Text = "\n Attack: " + currentNinja.Attack;
+  
             if (currentNinja.Health == 0)
             {
 
@@ -118,22 +119,51 @@ namespace CombatForms
                 NinjaIndex++;
                 NinjaList[NinjaIndex].Attack += RoundNumber;
                 currentNinja = NinjaList[NinjaIndex];
-               
+
 
 
                 Update();
             }
+            if(p1.Lifes == 0)
+            {
+                Application.Restart();
 
-            
+            }
+
+
             progressBar2.Value = (int)p1.Health;
             progressBar1.Value = (int)currentNinja.Health;
             richTextBox3.Text = "Round: " + RoundNumber;
 
         }
-
+        private float lifes;
+        private float attack;
+        private float health;
+        private float save;
+        private float load;
         private void richTextBox4_TextChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Player curPlayer = new Player(this.health, this.attack, this.lifes, "Player");
+            SaveLoad<Player>.Serialize("Player", curPlayer);
+            
+        }
+
+        private void richTextBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Player lastPlayer = SaveLoad<Player>.Deserialize("Player");
+            this.attack = lastPlayer.Attack;
+            this.health = lastPlayer.Health;
+            this.lifes = lastPlayer.Lifes;
         }
     }
 }

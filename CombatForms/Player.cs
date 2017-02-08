@@ -28,7 +28,7 @@ namespace CombatForms
     /// </summary>
     public interface IDamageable
     {
-        void TakeDamage(int damage);
+        void TakeDamage(float damage);
 
 
 
@@ -44,9 +44,10 @@ namespace CombatForms
     public class Player : IDamageable, IDamage
     {
         //make these private
-        private int lifes;
-        private int attack;
-        private int health;
+        private float lifes;
+        private float attack;
+        private float health;
+        private int save1;
         public float Lifes
         {
             get { return lifes; }
@@ -61,7 +62,7 @@ namespace CombatForms
             get { return health; }
         }
 
-        public Player(int Health, int Attack, int Lifes, string name)
+        public Player(float Health, float Attack, float Lifes, string name)
         {
             name = null;
             health = Health;
@@ -70,8 +71,9 @@ namespace CombatForms
 
         }
 
+      
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
             health -= damage;
             if(health<= 0)
@@ -89,6 +91,11 @@ namespace CombatForms
         public void GiveDamage(IDamageable something)
         {
             something.TakeDamage(attack);
+        }
+        public void Save(float a)
+        {
+              
+         
         }
     }
 

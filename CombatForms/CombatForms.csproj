@@ -53,6 +53,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="FSM.cs" />
+    <Compile Include="GameSaves.cs" />
     <Compile Include="Ninja.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />

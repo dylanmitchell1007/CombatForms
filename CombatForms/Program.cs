@@ -50,6 +50,7 @@ namespace CombatForms
                 //    //player.AddTalk((Callback<string>)SaySomething);
                 //    //player.AddTalk((Callback<string>)SayAnotherThing);
                 //    player.Talk("\n -Dylan:");
+                
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new Form1());

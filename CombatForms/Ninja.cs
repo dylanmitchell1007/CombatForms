@@ -9,20 +9,20 @@ namespace CombatForms
     
     class Ninja : IDamageable, IDamage
     {
-        private int attack;
-        private int health;
-        public int Attack
+        private float attack;
+        private float health;
+        public float Attack
         {
             get { return attack;}
             set { attack = value; }
         }
-        public int Health
+        public float Health
         {
             get { return health; }
             
         }
 
-        public Ninja(int Health, int Attack, string name)
+        public Ninja(float Health, float Attack, string name)
         {
             name = null;
             health = Health;
@@ -30,7 +30,7 @@ namespace CombatForms
 
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
             health -= damage;
         }
@@ -39,6 +39,8 @@ namespace CombatForms
         {
             something.TakeDamage(attack);
         }
+
+
     }
 }
 
