@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 using System.IO;
-using System.Threading.Tasks;
 
 
 namespace CombatForms
@@ -25,7 +22,7 @@ namespace CombatForms
         {
             T data;
             XmlSerializer serializer = new XmlSerializer(typeof(T));
-            TextReader reader = new StreamReader(Environment.CurrentDirectory + fileName + ".xml");
+            TextReader reader = new StreamReader(Environment.CurrentDirectory + "\\" + fileName + ".xml");
             data = (T)serializer.Deserialize(reader);
             reader.Close();
             return data;
@@ -36,8 +33,10 @@ namespace CombatForms
         private float lifes;
         private float attack;
         private float health;
-        private float save;
-        private float load;
+        private IDamageable knife;
+        
+        //private float save;
+        //private float load;
         private void SaveData_Click(object sender, EventArgs e)
         {
             Player curPlayer = new Player(this.health, this.attack, this.lifes, "Player");
@@ -46,25 +45,26 @@ namespace CombatForms
         private void LoadLast_Click(object sender, EventArgs e)
         {
             Player lastPlayer = SaveLoad<Player>.Deserialize("Player");
+            
             this.attack = lastPlayer.Attack;
             this.health = lastPlayer.Health;
             this.lifes = lastPlayer.Lifes;
         }
 
      
-        List<GameSaves> Save1;
-        List<GameSaves> Load1;
-        public void Save(float a)
-        {
-            Save1 = new List<GameSaves>();
+        //List<GameSaves> Save1;
+        //List<GameSaves> Load1;
+        //public void Save(float a)
+        //{
+        //    Save1 = new List<GameSaves>();
             
         
-        }
-        public void Load(string b)
-        {
-            Load1 = new List<GameSaves>();
+        //}
+        //public void Load(string b)
+        //{
+        //    Load1 = new List<GameSaves>();
 
 
-        }
+        //}
     }
 }

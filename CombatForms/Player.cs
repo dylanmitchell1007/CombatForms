@@ -7,8 +7,33 @@ using System.Threading.Tasks;
 
 namespace CombatForms
 {
+   
+   
+class Singleton
+    {
+        private int roundnumber;
+        
+
+        public int RoundNumber
+        {
+           get { return roundnumber;}
+            set { roundnumber = value;}
+        }
+            
 
 
+      
+        private static readonly Singleton instance = new Singleton();
+        private Singleton()
+        {
+            roundnumber = 1;   
+        }
+        public static Singleton Instance
+        {
+            get{ return instance; }
+            
+        }
+    }
     public enum PlayerState
     {
         INIT,
@@ -36,6 +61,8 @@ namespace CombatForms
     public interface IDamage
     {
         void GiveDamage(IDamageable something);
+        //void Knife(IDamageable damage);
+        
 
     }
 
@@ -47,27 +74,42 @@ namespace CombatForms
         private float lifes;
         private float attack;
         private float health;
-        private int save1;
+        private float knife;
+     
+
+      
+        
         public float Lifes
         {
             get { return lifes; }
+            set { lifes = value; }
         }
+
+        
 
         public float Attack
         {
             get { return attack; }
+            set { attack = value; }
         }
         public float Health
         {
             get { return health; }
+            set { health = value; }
         }
+      
+        public Player()
+        {
 
+        }
         public Player(float Health, float Attack, float Lifes, string name)
         {
-            name = null;
+       
             health = Health;
             attack = Attack;
             lifes = Lifes;
+            
+           
 
         }
 
@@ -87,16 +129,18 @@ namespace CombatForms
                 Console.WriteLine("YOU LOSE");
             }
         }
-
+        public void Knife(IDamageable damage)
+        {
+            
+            damage.TakeDamage(attack);
+        }
+     
         public void GiveDamage(IDamageable something)
         {
+            
             something.TakeDamage(attack);
         }
-        public void Save(float a)
-        {
-              
-         
-        }
+      
     }
 
         public delegate void OnDamaged<T>(T p);
