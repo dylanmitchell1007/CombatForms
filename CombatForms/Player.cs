@@ -12,8 +12,15 @@ namespace CombatForms
 class Singleton
     {
         private int roundnumber;
-        
 
+        private Player player;
+        public Player Player
+        {
+            get;
+            set;
+        }
+            
+       
         public int RoundNumber
         {
            get { return roundnumber;}
@@ -55,7 +62,11 @@ class Singleton
     {
         void TakeDamage(float damage);
 
-
+        float Health
+        {
+            get;
+            set;
+        }
 
     }
     public interface IDamage
@@ -74,11 +85,28 @@ class Singleton
         private float lifes;
         private float attack;
         private float health;
-        private float knife;
+       
+        private int knifedurability;
+        private int healthPackdurability;
      
+        public int attackboost
+        {
+            get { return attackboost; }
+            
+        }
+        public int Knifedurability
+        {
+            get { return knifedurability; }
+            set { knifedurability = value; }
+        }
 
-      
-        
+        public int HealthPackdurability
+        {
+            get { return healthPackdurability; }
+            set { healthPackdurability = value; }
+
+
+        }
         public float Lifes
         {
             get { return lifes; }
@@ -100,7 +128,8 @@ class Singleton
       
         public Player()
         {
-
+            healthPackdurability = 100;
+            knifedurability = 100;
         }
         public Player(float Health, float Attack, float Lifes, string name)
         {
@@ -108,6 +137,9 @@ class Singleton
             health = Health;
             attack = Attack;
             lifes = Lifes;
+            knifedurability = 100;
+            healthPackdurability = 100;
+            //attackboost = 100;
             
            
 
@@ -129,9 +161,20 @@ class Singleton
                 Console.WriteLine("YOU LOSE");
             }
         }
+        public void AttackBoost(IDamageable Aboost)
+        {
+            Aboost.Health -= 8;
+            Aboost.TakeDamage(attack);
+        }
+        public void HealthPack(IDamageable GetsHealth)
+        {
+            GetsHealth.Health += 50;
+            healthPackdurability -= 50;            
+        }
         public void Knife(IDamageable damage)
         {
             
+            knifedurability -= 5;
             damage.TakeDamage(attack);
         }
      

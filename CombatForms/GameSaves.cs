@@ -33,7 +33,7 @@ namespace CombatForms
         private float lifes;
         private float attack;
         private float health;
-        private IDamageable knife;
+       
         
         //private float save;
         //private float load;

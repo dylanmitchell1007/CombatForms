@@ -19,6 +19,7 @@ namespace CombatForms
         public float Health
         {
             get { return health; }
+            set { health = value; }
             
         }
 
