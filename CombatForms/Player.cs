@@ -7,40 +7,6 @@ using System.Threading.Tasks;
 
 namespace CombatForms
 {
-   
-   
-class Singleton
-    {
-        private int roundnumber;
-
-        private Player player;
-        public Player Player
-        {
-            get;
-            set;
-        }
-            
-       
-        public int RoundNumber
-        {
-           get { return roundnumber;}
-            set { roundnumber = value;}
-        }
-            
-
-
-      
-        private static readonly Singleton instance = new Singleton();
-        private Singleton()
-        {
-            roundnumber = 1;   
-        }
-        public static Singleton Instance
-        {
-            get{ return instance; }
-            
-        }
-    }
     public enum PlayerState
     {
         INIT,
@@ -48,11 +14,6 @@ class Singleton
         Attack,
         Exit,
     }
-
-
-
-
-
 
     /// <summary>
     /// This is the inteface Attemp 1.
@@ -139,6 +100,7 @@ class Singleton
             lifes = Lifes;
             knifedurability = 100;
             healthPackdurability = 100;
+            
             //attackboost = 100;
             
            

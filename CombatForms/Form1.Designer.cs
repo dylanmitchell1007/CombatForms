@@ -48,13 +48,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.richTextBox6 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox7 = new System.Windows.Forms.RichTextBox();
+            this.button10 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
             this.richTextBox1.BackColor = System.Drawing.Color.Gray;
             this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(47, 18);
+            this.richTextBox1.Location = new System.Drawing.Point(47, 3);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 36);
             this.richTextBox1.TabIndex = 0;
@@ -64,7 +67,7 @@
             // richTextBox3
             // 
             this.richTextBox3.BackColor = System.Drawing.Color.Gray;
-            this.richTextBox3.Location = new System.Drawing.Point(217, 28);
+            this.richTextBox3.Location = new System.Drawing.Point(216, 14);
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.Size = new System.Drawing.Size(49, 49);
             this.richTextBox3.TabIndex = 2;
@@ -74,14 +77,14 @@
             // progressBar1
             // 
             this.progressBar1.ForeColor = System.Drawing.Color.Red;
-            this.progressBar1.Location = new System.Drawing.Point(342, 69);
+            this.progressBar1.Location = new System.Drawing.Point(342, 40);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(100, 23);
             this.progressBar1.TabIndex = 3;
             // 
             // progressBar2
             // 
-            this.progressBar2.Location = new System.Drawing.Point(47, 67);
+            this.progressBar2.Location = new System.Drawing.Point(47, 40);
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(100, 23);
             this.progressBar2.TabIndex = 4;
@@ -91,7 +94,7 @@
             // 
             this.richTextBox2.BackColor = System.Drawing.Color.Gray;
             this.richTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox2.Location = new System.Drawing.Point(342, 18);
+            this.richTextBox2.Location = new System.Drawing.Point(342, 1);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(100, 36);
             this.richTextBox2.TabIndex = 5;
@@ -250,6 +253,37 @@
             this.label3.Size = new System.Drawing.Size(0, 13);
             this.label3.TabIndex = 20;
             // 
+            // richTextBox6
+            // 
+            this.richTextBox6.BackColor = System.Drawing.SystemColors.InfoText;
+            this.richTextBox6.ForeColor = System.Drawing.Color.Lime;
+            this.richTextBox6.Location = new System.Drawing.Point(47, 69);
+            this.richTextBox6.Name = "richTextBox6";
+            this.richTextBox6.Size = new System.Drawing.Size(100, 28);
+            this.richTextBox6.TabIndex = 21;
+            this.richTextBox6.Text = "";
+            this.richTextBox6.TextChanged += new System.EventHandler(this.richTextBox6_TextChanged);
+            // 
+            // richTextBox7
+            // 
+            this.richTextBox7.BackColor = System.Drawing.SystemColors.InfoText;
+            this.richTextBox7.ForeColor = System.Drawing.Color.Lime;
+            this.richTextBox7.Location = new System.Drawing.Point(342, 69);
+            this.richTextBox7.Name = "richTextBox7";
+            this.richTextBox7.Size = new System.Drawing.Size(100, 28);
+            this.richTextBox7.TabIndex = 22;
+            this.richTextBox7.Text = "";
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(198, 67);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(88, 23);
+            this.button10.TabIndex = 23;
+            this.button10.Text = "Store";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -257,6 +291,9 @@
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImage = global::CombatForms.Properties.Resources.Japan_home4;
             this.ClientSize = new System.Drawing.Size(484, 462);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.richTextBox7);
+            this.Controls.Add(this.richTextBox6);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -307,6 +344,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.RichTextBox richTextBox6;
+        private System.Windows.Forms.RichTextBox richTextBox7;
+        private System.Windows.Forms.Button button10;
     }
 }
 
