@@ -13,7 +13,8 @@ namespace CombatForms
         public static void Serialize(string fileName, T data)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
-            TextWriter writer = new StreamWriter(Environment.CurrentDirectory + fileName + ".xml");
+            string path = Environment.CurrentDirectory + "\\" + fileName + ".xml";
+            TextWriter writer = new StreamWriter(path);
             serializer.Serialize(writer, data);
             writer.Close();
 
@@ -22,7 +23,7 @@ namespace CombatForms
         {
             T data;
             XmlSerializer serializer = new XmlSerializer(typeof(T));
-            TextReader reader = new StreamReader(Environment.CurrentDirectory + "\\" + fileName + ".xml");
+            TextReader reader = new StreamReader(Environment.CurrentDirectory  + "\\" + fileName + ".xml");
             data = (T)serializer.Deserialize(reader);
             reader.Close();
             return data;
@@ -33,13 +34,13 @@ namespace CombatForms
         private float lifes;
         private float attack;
         private float health;
-       
+        private float score;
         
         //private float save;
         //private float load;
         private void SaveData_Click(object sender, EventArgs e)
         {
-            Player curPlayer = new Player(this.health, this.attack, this.lifes, "Player");
+            Player curPlayer = new Player(this.health, this.attack, this.lifes, "Player", this.score);
             SaveLoad<Player>.Serialize("Player", curPlayer);
         }
         private void LoadLast_Click(object sender, EventArgs e)
@@ -49,6 +50,7 @@ namespace CombatForms
             this.attack = lastPlayer.Attack;
             this.health = lastPlayer.Health;
             this.lifes = lastPlayer.Lifes;
+            this.score = lastPlayer.Score;
         }
 
      

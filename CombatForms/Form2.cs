@@ -23,7 +23,8 @@ namespace CombatForms
         }
         public new void Update()
         {
-            richTextBox1.Text = "Player Score:" + score;
+            richTextBox1.Text = "Player Score:" + Singleton.Instance.P1Score;
+            
         }
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {            
@@ -32,7 +33,26 @@ namespace CombatForms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Update();
+          
+            if (Singleton.Instance.P1Score < 0)
+            {
+                button1.Enabled = false;
+                Singleton.Instance.P1Score = 0;
+            }
+
+            if (Singleton.Instance.P1Score < 100)
+            {
+                button1.Enabled = false;
+                richTextBox1.Text = "You do not have enough credits";
+            }
+            if (Singleton.Instance.P1Score >= 100)
+            {
+             Singleton.Instance.P1Score -= 100;
+             Singleton.Instance.Player.Knifedurability = 100;
+             
+             Update();
+            }
+          
         }
 
         private void backtogame_Click(object sender, EventArgs e)
@@ -40,6 +60,32 @@ namespace CombatForms
             Form1 form1 = new Form1();
             this.Dispose();
             form1.Show();
+            Update();
+           
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //if (Singleton.Instance.P1Score <= 0)
+            //{
+            //    button2.Enabled = false;
+            //    Singleton.Instance.P1Score = 0;
+            //}
+
+            if (Singleton.Instance.P1Score < 100)
+            {
+                button2.Enabled = false;
+                richTextBox1.Text = "You do not have enough credits";
+                
+            }
+            if(Singleton.Instance.P1Score >= 500)
+            {
+            Singleton.Instance.Player.Health = 100;
+            Singleton.Instance.P1Score -= 500;
+            }
+            
+          
+            Update();
         }
     }
 }

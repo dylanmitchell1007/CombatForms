@@ -46,6 +46,7 @@ namespace CombatForms
         private float lifes;
         private float attack;
         private float health;
+        private float score;
        
         private int knifedurability;
         private int healthPackdurability;
@@ -92,7 +93,12 @@ namespace CombatForms
             healthPackdurability = 100;
             knifedurability = 100;
         }
-        public Player(float Health, float Attack, float Lifes, string name)
+        public float Score
+        {
+            get{ return Singleton.Instance.P1Score; }
+            set{ score = value; }
+        }
+        public Player(float Health, float Attack, float Lifes, string name, float score)
         {
        
             health = Health;
@@ -100,6 +106,7 @@ namespace CombatForms
             lifes = Lifes;
             knifedurability = 100;
             healthPackdurability = 100;
+            score = Score;
             
             //attackboost = 100;
             

@@ -21,7 +21,7 @@ namespace CombatForms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Singleton.Instance.Player = new Player(100, 10, 5, "P1");
+            Singleton.Instance.Player = new Player(100, 10, 5, "P1", 0);
 
             Singleton.Instance.NinjaList = new List<Ninja>();
 
@@ -29,7 +29,9 @@ namespace CombatForms
             {
                 Singleton.Instance.NinjaList.Add(new Ninja(100, 5 + Singleton.Instance.RoundNumber, "Ninja " + a));
             }
+            richTextBox4.Text = "\n Lifes:" + Singleton.Instance.Player.Lifes + "\n Attack: " + Singleton.Instance.Player.Attack;
 
+            richTextBox5.Text = "\n Attack: ";
             Singleton.Instance.NinjaIndex = 0;
 
             Singleton.Instance.CurrentNinja = Singleton.Instance.NinjaList[Singleton.Instance.NinjaIndex];
@@ -99,28 +101,11 @@ namespace CombatForms
 
         public new void Update()
         {
-            if (Singleton.Instance.Player.HealthPackdurability == 0)
-            {
-                HealthPackLabel.Text = "Your out of HealthPacks!!";
-            }
+            //Healthpack Text.
             richTextBox4.Text = "\n Lifes:" + Singleton.Instance.Player.Lifes + "\n Attack: " + Singleton.Instance.Player.Attack;
 
             richTextBox5.Text = "\n Attack: " + Singleton.Instance.CurrentNinja.Attack;
-
-            if (Singleton.Instance.RoundNumber == 26)
-            {
-                button9.Enabled = false;
-            }
-            if (Singleton.Instance.RoundNumber == 25)
-            {
-                Singleton.Instance.Player.Knifedurability = 100;
-                button9.Enabled = true;
-                label3.Text = "<---USE THIS BOOST";
-
-                button9.Text = "Attack Boost: (" + Singleton.Instance.CurrentNinja.Attack + "%)";
-                Singleton.Instance.CurrentNinja.Attack = 23;
-
-            }
+            //CurrentNinja Health Conditions.
             if (Singleton.Instance.CurrentNinja.Health <= 0)
             {
                 Singleton.Instance.P1Score += 100;
@@ -130,27 +115,73 @@ namespace CombatForms
                 Singleton.Instance.NinjaIndex++;
                 Singleton.Instance.NinjaList[Singleton.Instance.NinjaIndex].Attack += Singleton.Instance.RoundNumber;
                 Singleton.Instance.CurrentNinja = Singleton.Instance.NinjaList[Singleton.Instance.NinjaIndex];
-                if (Singleton.Instance.RoundNumber >= 12)
-                {
+            //When advance past round (12)
+            if (Singleton.Instance.RoundNumber >= 12)
+            {
                     button7.Enabled = true;
                     button7.Text = "Knife (" + Singleton.Instance.Player.Knifedurability + "%)";
-                }
+            }
+                //When advance past round (16) 
                 if (Singleton.Instance.RoundNumber >= 16)
-                {
-                    Singleton.Instance.CurrentNinja.Attack = 15;
-                    button8.Enabled = true;
-                    button8.Text = "HealthPack(" + Singleton.Instance.Player.HealthPackdurability + "%)";
+            {
+                Singleton.Instance.CurrentNinja.Attack = 15;
+                button8.Enabled = true;
+                button8.Text = "HealthPack(" + Singleton.Instance.Player.HealthPackdurability + "%)";
 
-                }
+            }
+
+                //When advance to round (17) 
+                if (Singleton.Instance.RoundNumber == 17)
+            {
+                label3.Text = "<---USE THIS BOOST";
+
+            }
+
+                //When advance to round (18)
+                if (Singleton.Instance.RoundNumber == 18)
+                {
+                    button9.Text = "Wait for more";
+                    label3.Hide();
+                    button9.Enabled = true;
+                    button9.Text = "Attack Boost: (" + Singleton.Instance.CurrentNinja.Attack + "%)";
+
+
+
+                    //When advance to round (25) 
+                    if (Singleton.Instance.RoundNumber == 25)
+            {
+                Singleton.Instance.Player.Knifedurability = 100;
+                button9.Enabled = true;
+                label3.Text = "<---USE THIS BOOST";
+
+                //button9.Text = "Attack Boost: (" + Singleton.Instance.CurrentNinja.Attack + "%)";
+                Singleton.Instance.CurrentNinja.Attack = 23;
+
+            }
+
+                    //When advance to round (26)
+                    if (Singleton.Instance.RoundNumber == 26)
+                    {
+                        button9.Enabled = false;
+                    }
+
+
+            if (Singleton.Instance.Player.HealthPackdurability == 0)
+            {
+                HealthPackLabel.Text = "Your out of HealthPacks!!";
+            }
+
+
+
+          
+               
+           
+            
+               
 
                 Update();
             }
-            if (Singleton.Instance.RoundNumber == 18)
-            {
-                button9.Enabled = true;
-                button9.Text = "Attack Boost: (" + Singleton.Instance.CurrentNinja.Attack + "%)";
-
-
+           
 
                 if (Singleton.Instance.CurrentNinja.Health <= 0)
                 {
@@ -158,11 +189,7 @@ namespace CombatForms
                 }
 
             }
-            if (Singleton.Instance.RoundNumber == 17)
-            {
-                label3.Text = "<---USE THIS BOOST";
-
-            }
+        
 
             if (Singleton.Instance.Player.HealthPackdurability == 0)
             {
@@ -194,7 +221,7 @@ namespace CombatForms
             progressBar2.Value = (int)Singleton.Instance.Player.Health;
             progressBar1.Value = (int)Singleton.Instance.CurrentNinja.Health;
             richTextBox3.Text = "Round: " + Singleton.Instance.RoundNumber;
-            richTextBox6.Text = "Player Score: " + Singleton.Instance.RoundNumber + 100;
+            richTextBox6.Text = "Player Score: " + Singleton.Instance.P1Score;
         }
 
 
@@ -209,6 +236,7 @@ namespace CombatForms
 
             SaveLoad<Player>.Serialize("Player", Singleton.Instance.Player);
             SaveLoad<int>.Serialize("RoundNumber", Singleton.Instance.RoundNumber);
+            SaveLoad<int>.Serialize("Player Score", Singleton.Instance.P1Score);
 
         }
 
@@ -219,13 +247,14 @@ namespace CombatForms
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Singleton.Instance.RoundNumber = SaveLoad<int>.Deserialize("DebugRoundNumber");
-            Singleton.Instance.Player = SaveLoad<Player>.Deserialize("DebugPlayer");
+            Singleton.Instance.RoundNumber = SaveLoad<int>.Deserialize("RoundNumber");
+            Singleton.Instance.Player = SaveLoad<Player>.Deserialize("Player");
+            Singleton.Instance.P1Score = SaveLoad<int>.Deserialize("Player Score");
             richTextBox6.Text = "Player Score: " + Singleton.Instance.P1Score;
             richTextBox4.Text = "\n Lifes:" + Singleton.Instance.Player.Lifes + "\n Attack: " + Singleton.Instance.Player.Attack;
             richTextBox5.Text = "\n Attack: " + Singleton.Instance.CurrentNinja.Attack;
             richTextBox3.Text = "Round: " + Singleton.Instance.RoundNumber;
-
+            Update();
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -296,10 +325,8 @@ namespace CombatForms
 
         private void richTextBox6_TextChanged(object sender, EventArgs e)
         {
-            richTextBox6.Text = "Player Score: " + Singleton.Instance.P1Score;
             if (Singleton.Instance.RoundNumber >= 1)
             {
-                richTextBox6.Text = "Player Score: " + Singleton.Instance.P1Score;
                 Update();
             }
         }
@@ -310,7 +337,8 @@ namespace CombatForms
             {
                 Form2 form2 = new Form2();
                 this.Hide();                
-                form2.Show();                
+                form2.Show();
+                Update();             
             }            
         }     
     }

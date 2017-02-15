@@ -46,6 +46,7 @@ namespace CombatForms
                 //    Player player = new Player();
                 //    Player dylan = new Player();
                 //    Player matthew = new Player();
+
                 //    dylan.Attack(matthew);
                 //    //player.AddTalk((Callback<string>)SaySomething);
                 //    //player.AddTalk((Callback<string>)SayAnotherThing);
