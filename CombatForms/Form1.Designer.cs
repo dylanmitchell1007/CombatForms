@@ -51,6 +51,7 @@
             this.richTextBox6 = new System.Windows.Forms.RichTextBox();
             this.richTextBox7 = new System.Windows.Forms.RichTextBox();
             this.button10 = new System.Windows.Forms.Button();
+            this.ActivityLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -284,6 +285,15 @@
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
+            // ActivityLabel
+            // 
+            this.ActivityLabel.AutoSize = true;
+            this.ActivityLabel.ForeColor = System.Drawing.Color.Lime;
+            this.ActivityLabel.Location = new System.Drawing.Point(213, 1);
+            this.ActivityLabel.Name = "ActivityLabel";
+            this.ActivityLabel.Size = new System.Drawing.Size(0, 13);
+            this.ActivityLabel.TabIndex = 24;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -291,6 +301,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImage = global::CombatForms.Properties.Resources.Japan_home4;
             this.ClientSize = new System.Drawing.Size(484, 462);
+            this.Controls.Add(this.ActivityLabel);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.richTextBox7);
             this.Controls.Add(this.richTextBox6);
@@ -316,7 +327,6 @@
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -347,6 +357,7 @@
         private System.Windows.Forms.RichTextBox richTextBox6;
         private System.Windows.Forms.RichTextBox richTextBox7;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Label ActivityLabel;
     }
 }
 

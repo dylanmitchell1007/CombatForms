@@ -21,7 +21,7 @@ namespace CombatForms
             get { return health; }
             set { health = value; }
             
-        }
+        }public Ninja() { }
 
         public Ninja(float Health, float Attack, string name)
         {

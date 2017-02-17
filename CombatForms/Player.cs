@@ -1,10 +1,5 @@
-﻿using CombatForms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System;
+using System.Xml.Serialization;
 namespace CombatForms
 {
     public enum PlayerState
@@ -15,10 +10,6 @@ namespace CombatForms
         Exit,
     }
 
-    /// <summary>
-    /// This is the inteface Attemp 1.
-    /// Ninja vs Zombie.
-    /// </summary>
     public interface IDamageable
     {
         void TakeDamage(float damage);
@@ -39,14 +30,37 @@ namespace CombatForms
     }
 
 
-
+    [Serializable]
     public class Player : IDamageable, IDamage
     {
-        //make these private
+        public Player()
+        {
+            healthPackdurability = 100;
+            knifedurability = 100;
+        }
+        public Player(float Health, float Attack, float Lifes, string name, float score, float currentlevel)
+        {
+
+            health = Health;
+            attack = Attack;
+            lifes = Lifes;
+            knifedurability = 100;
+            healthPackdurability = 100;
+            score = Score;
+            currentlevel = Currentlevel;
+
+            //attackboost = 100;
+
+
+
+        }
+
+
         private float lifes;
         private float attack;
         private float health;
         private float score;
+        private float currentlevel;
        
         private int knifedurability;
         private int healthPackdurability;
@@ -88,32 +102,19 @@ namespace CombatForms
             set { health = value; }
         }
       
-        public Player()
-        {
-            healthPackdurability = 100;
-            knifedurability = 100;
-        }
+        
         public float Score
         {
             get{ return Singleton.Instance.P1Score; }
             set{ score = value; }
         }
-        public Player(float Health, float Attack, float Lifes, string name, float score)
+        public float Currentlevel
         {
-       
-            health = Health;
-            attack = Attack;
-            lifes = Lifes;
-            knifedurability = 100;
-            healthPackdurability = 100;
-            score = Score;
-            
-            //attackboost = 100;
-            
-           
-
+            get { return currentlevel; }
+            set { currentlevel = Currentlevel; }
         }
 
+        
       
 
         public void TakeDamage(float damage)
@@ -154,7 +155,7 @@ namespace CombatForms
         }
       
     }
-
+    
         public delegate void OnDamaged<T>(T p);
     }
 

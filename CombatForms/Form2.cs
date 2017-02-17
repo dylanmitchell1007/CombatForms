@@ -14,6 +14,7 @@ namespace CombatForms
     {        
         public Form2()
         {
+            
             InitializeComponent();            
             Update();
         }
@@ -57,9 +58,10 @@ namespace CombatForms
 
         private void backtogame_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1();
+            Singleton.Instance.Gameform.Show();
+
             this.Dispose();
-            form1.Show();
+            
             Update();
            
         }

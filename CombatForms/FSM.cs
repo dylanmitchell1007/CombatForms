@@ -8,8 +8,6 @@ namespace CombatForms
 {
     class FSM<T>
     {
-
-
         public FSM()
         {
             current = null;
@@ -22,22 +20,19 @@ namespace CombatForms
                 states.Add(s.name, s);
             }
         }
+
         Dictionary<string, State> states;
         State current;
         private Dictionary<string, List<State>> transitions;
 
-        public void ChangeState(T e)
+        public void addOnEnter(T state, Delegate enter)
         {
-            string Key = current.ToString() + "->" + (e as Enum).ToString();
-            if (transitions[Key] != null)
-            {
-                current.onExit.Invoke();
-                current = states[(e as Enum).ToString()];
-                current.onEnter.Invoke();
-            }
+            states[state.ToString()].AddEnterFunction(enter);
         }
-
-
+        public void addOnExit(T state, Delegate exit)
+        {
+            states[state.ToString()].AddExitFunction(exit);
+        }
 
         public bool AddState(State state)
         {
@@ -50,51 +45,55 @@ namespace CombatForms
         }
 
 
-        public bool AddTransition<V>(V a, V b)
+        public bool AddTransition(T from, T to)
         {
-            State s = a as State;
-            var tmp = transitions[s.name];
-
-            return true;
-        }
-
-
-        public State GetState(T e)
-        {
-            string key = (e as State).name;
-            return states[key];
-        }
-
-        private bool isValidTransition(State to)
-        {
-            var validStates = transitions[current.name];
-            if (validStates == null)
-                return false;
-            foreach (var state in validStates)
+            string Key = from.ToString() + "->" +to.ToString();
+            if(transitions.ContainsKey(Key) == false)
             {
-                if (state == to)
-                    return true;
+                List<State> temp = new List<State>();
+                temp.Add(states[from.ToString()]);
+                temp.Add(states[to.ToString()]);
+                transitions.Add(Key, temp);
+                return true;
             }
             return false;
         }
 
 
+        public void ChangeState(T to)
+        {
+            string Key = current.Name + "->" + to.ToString();
+            if (transitions.ContainsKey(Key))
+            {
+                current.onExit.Invoke();
+                current = states[to.ToString()];
+                current.onEnter.Invoke();
+            }
+        }
+
+
+        public State GetCurrentState()
+        {
+            return current;
+        }       
 
 
         public bool Start(T state)
         {
-            return true;
+            if (states.ContainsKey(state.ToString()))
+            {
+                current = states[state.ToString()];
+                current.onEnter.Invoke();
+                return true;
+            }
+            return false;
         }
-
-
 
 
         public bool Update()
         {
             return true;
         }
-
-
 
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CombatForms
 {
@@ -12,6 +13,7 @@ namespace CombatForms
 
         private List<Ninja> m_ninjaList;
 
+        Form gameform;
         private Ninja m_currentNinja;
         public int NinjaIndex
         {
@@ -31,7 +33,7 @@ namespace CombatForms
         }
 
 
-        private int roundnumber;
+        private int roundnumber = 1;
         private int p1score;
         private Player player;
         public Player Player
@@ -52,12 +54,16 @@ namespace CombatForms
             set { p1score = value; }
         }
 
-
+        public Form Gameform
+        {
+            get { return gameform; }
+            set { gameform = value; }
+        }
 
         private static readonly Singleton instance = new Singleton();
         private Singleton()
         {
-            roundnumber = 1;
+          
         }
         public static Singleton Instance
         {
