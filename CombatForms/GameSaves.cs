@@ -14,7 +14,7 @@ namespace CombatForms
         public static void Serialize(string fileName, T data)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
-            TextWriter writer = new StreamWriter("C: \\Users\\dylan.mitchell\\Documents\\Visual Studio 2015\\Projects\\CombatForms\\CombatForms\\SaveGames" + fileName);
+            TextWriter writer = new StreamWriter("C: \\Users\\dylan.mitchell\\Documents\\Visual Studio 2015\\Projects\\CombatForms\\CombatForms\\SaveGames\\" + fileName);
             serializer.Serialize(writer, data);
 
 
@@ -27,7 +27,7 @@ namespace CombatForms
         {
             T data;
             XmlSerializer serializer = new XmlSerializer(typeof(T));
-            TextReader reader = new StreamReader(Environment.CurrentDirectory + "\\" + fileName + ".xml");
+            TextReader reader = new StreamReader("C: \\Users\\dylan.mitchell\\Documents\\Visual Studio 2015\\Projects\\CombatForms\\CombatForms\\SaveGames\\" + fileName);
             data = (T)serializer.Deserialize(reader);
             reader.Close();
             return data;
@@ -46,22 +46,15 @@ namespace CombatForms
         //private float load;
         private void SaveData_Click(object sender, EventArgs e)
         {
-
-            Player curPlayer = new Player(this.health, this.attack, this.lifes, "Player", this.score, this.currentlevel);
-            SaveLoad<Player>.Serialize("Player", curPlayer);
-
-
+            SaveLoad<Player>.Serialize("Player", Singleton.Instance.Player);
 
         }
         private void LoadLast_Click(object sender, EventArgs e)
         {
             Player lastPlayer = SaveLoad<Player>.Deserialize("Player");
-
-            this.attack = lastPlayer.Attack;
-            this.health = lastPlayer.Health;
-            this.lifes = lastPlayer.NumLives;
-            this.score = lastPlayer.Score;
-            this.currentlevel = lastPlayer.Currentlevel;
+            Singleton.Instance.Player = lastPlayer;
+            Singleton.Instance.GSM.Start(Singleton.Instance.Player.Currentlevel);
+            Singleton.Instance.UpdateHud();
         }
 
 

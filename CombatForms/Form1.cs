@@ -21,14 +21,14 @@ namespace CombatForms
         {
 
             InitializeComponent();
-            Singleton.Instance.Player = new Player(100, 10, 5, "P1", 0, 1);
+            Singleton.Instance.Player = new Player(100, 10, 5, "P1", 0, 0);
             Singleton.Instance.Gameform = this;
             Singleton.Instance.NinjaList = new List<Ninja>();
             Singleton.Instance.NinjaIndex = 0;
             Singleton.Instance.UpdateHud += UpdateHud;
             //Singleton.Instance.CurrentNinja = Singleton.Instance.NinjaList[Singleton.Instance.NinjaIndex];
 
-            GameFsm = new FSM(50);
+            Singleton.Instance.GSM = new FSM(50);
 
             for (int a = 1; a <= 100; a++)
             {
@@ -38,14 +38,14 @@ namespace CombatForms
             for (int i = 1; i <= 25; i++)
             {
 
-                GameFsm.AddTransition(i, i + 1);
-                GameFsm.addOnEnter(i, (Handler)(delegate { Debug.WriteLine("entered round" + i.ToString()); }));
-                GameFsm.addOnExit(i, (Handler)(delegate { Debug.WriteLine("exited round" + i.ToString()); }));
+                Singleton.Instance.GSM.AddTransition(i, i + 1);
+                Singleton.Instance.GSM.addOnEnter(i, (Handler)(delegate { Debug.WriteLine("entered round" + i.ToString()); }));
+                Singleton.Instance.GSM.addOnExit(i, (Handler)(delegate { Debug.WriteLine("exited round" + i.ToString()); }));
 
             }
 
 
-            GameFsm.Start(1);
+            Singleton.Instance.GSM.Start(1);
             InitHud();
             RoundLevel();
 
@@ -110,13 +110,17 @@ namespace CombatForms
             {
                 Singleton.Instance.Player.Health = 100;
             }
+            Singleton.Instance.Player.Currentlevel = Singleton.Instance.GSM.GetCurrentState().Id;
+            Singleton.Instance.Player.Score = Singleton.Instance.P1Score;
             progressBar1.Value = (int)Singleton.Instance.CurrentNinja.Health;
-            richTextBox3.Text = GameFsm.GetCurrentState().name;
+            richTextBox3.Text = Singleton.Instance.GSM.GetCurrentState().Name; //GameFsm.GetCurrentState().name;
 
-            richTextBox6.Text = "Player Score: " + Singleton.Instance.P1Score;
+            richTextBox6.Text = "Player Score: " + Singleton.Instance.Player.Score;
             //5, 12, 17, 25
             richTextBox4.Text = "\n Lifes:" + Singleton.Instance.Player.NumLives + "\n Attack: " + Singleton.Instance.Player.Attack;
             richTextBox5.Text = "\n Attack: " + Singleton.Instance.CurrentNinja.Attack;
+            
+           
         }
         public void RoundLevel()
         {
@@ -182,7 +186,7 @@ namespace CombatForms
                 Singleton.Instance.RoundNumber++;
                 Singleton.Instance.NinjaIndex++;
                 Singleton.Instance.Player.NumLives++;
-                GameFsm.ChangeState(Singleton.Instance.RoundNumber);
+                Singleton.Instance.GSM.ChangeState(Singleton.Instance.RoundNumber);
                 Singleton.Instance.P1Score += 100;
                 Singleton.Instance.CurrentNinja.Health = 100;
                 UpdateHud();
@@ -195,9 +199,9 @@ namespace CombatForms
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Player p = Singleton.Instance.Player;
+          
             SaveLoad<Player>.Serialize("Player", Singleton.Instance.Player);
-
+            
             //SaveLoad<GameNumber>.Serialize("Player lvl", currentlevel);
             //SaveLoad<int>.Serialize("Player Score", Singleton.Instance.P1Score);
 
@@ -205,14 +209,11 @@ namespace CombatForms
         private void button6_Click(object sender, EventArgs e)
         {
 
-
-            Singleton.Instance.Player = SaveLoad<Player>.Deserialize("Player");
-            Singleton.Instance.P1Score = SaveLoad<int>.Deserialize("Player Score");
-            richTextBox6.Text = "Player Score: " + Singleton.Instance.P1Score;
-            richTextBox4.Text = "\n Lifes:" + Singleton.Instance.Player.NumLives + "\n Attack: " + Singleton.Instance.Player.Attack;
-            richTextBox5.Text = "\n Attack: " + Singleton.Instance.CurrentNinja.Attack;
-
-            Update();
+            Player lastPlayer = SaveLoad<Player>.Deserialize("Player");
+            Singleton.Instance.Player = lastPlayer;
+            Singleton.Instance.GSM.Start(Singleton.Instance.Player.Currentlevel);
+            Singleton.Instance.UpdateHud();
+        
         }
         private void button7_Click(object sender, EventArgs e)
         {
@@ -298,6 +299,11 @@ namespace CombatForms
         }
 
         private void richTextBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox6_TextChanged(object sender, EventArgs e)
         {
 
         }

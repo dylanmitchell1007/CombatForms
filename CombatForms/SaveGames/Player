@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Player xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Health>100</Health>
+  <Health>10</Health>
   <AttackBoost>0</AttackBoost>
   <Knifedurability>100</Knifedurability>
   <HealthPackdurability>100</HealthPackdurability>
-  <NumLives>5</NumLives>
+  <NumLives>11</NumLives>
   <Attack>10</Attack>
-  <Score>0</Score>
-  <Currentlevel>1</Currentlevel>
+  <Score>1200</Score>
+  <Currentlevel>12</Currentlevel>
 </Player>

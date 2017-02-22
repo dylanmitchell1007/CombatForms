@@ -10,7 +10,7 @@ namespace CombatForms
     class Singleton
     {
         private int m_ninjaIndex;
-
+        private FSM GS;
         private List<Ninja> m_ninjaList;
 
         Form gameform;
@@ -26,6 +26,7 @@ namespace CombatForms
             get; set;
         }
 
+        public FSM GSM { get; set; }
         public Ninja CurrentNinja
         {
             get { return m_currentNinja; }

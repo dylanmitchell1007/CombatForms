@@ -39,7 +39,7 @@ namespace CombatForms
             Knifedurability = 100;
         }
 
-        public Player(float h, float a, float l, string n, float s, float cl)
+        public Player(float h, float a, float l, string n, float s, int cl)
         {
 
             Health = h;
@@ -57,7 +57,7 @@ namespace CombatForms
         public float NumLives { get; set; }
         public float Attack { get; set; }
         public float Score { get; set; }
-        public float Currentlevel { get; set; }
+        public int Currentlevel { get; set; }
 
         #region functions
 
