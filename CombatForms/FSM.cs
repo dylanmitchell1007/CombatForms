@@ -6,30 +6,41 @@ using System.Threading.Tasks;
 
 namespace CombatForms
 {
-    class FSM<T>
+    class FSM
     {
-        public FSM()
+        public FSM(int HowMany)
         {
             current = null;
             transitions = new Dictionary<string, List<State>>();
             states = new Dictionary<string, State>();
-            var v = Enum.GetValues(typeof(T));
-            foreach (var e in v)
+            for (int i = 1; i <= HowMany; i++)
             {
-                State s = new State(e as Enum);
+                State s = new State();
+                s.name = i.ToString();
+                s.Id = i;
                 states.Add(s.name, s);
             }
+
+
+        }
+
+
+
+
+        public FSM()
+        {
+
         }
 
         Dictionary<string, State> states;
         State current;
         private Dictionary<string, List<State>> transitions;
-
-        public void addOnEnter(T state, Delegate enter)
+        public void addOnEnter(int state, Delegate enter)
         {
             states[state.ToString()].AddEnterFunction(enter);
         }
-        public void addOnExit(T state, Delegate exit)
+
+        public void addOnExit(int state, Delegate exit)
         {
             states[state.ToString()].AddExitFunction(exit);
         }
@@ -44,11 +55,10 @@ namespace CombatForms
             return false;
         }
 
-
-        public bool AddTransition(T from, T to)
+        public bool AddTransition(int from, int to)
         {
-            string Key = from.ToString() + "->" +to.ToString();
-            if(transitions.ContainsKey(Key) == false)
+            string Key = from.ToString() + "->" + to.ToString();
+            if (transitions.ContainsKey(Key) == false)
             {
                 List<State> temp = new List<State>();
                 temp.Add(states[from.ToString()]);
@@ -60,14 +70,14 @@ namespace CombatForms
         }
 
 
-        public void ChangeState(T to)
+        public void ChangeState(int to)
         {
             string Key = current.Name + "->" + to.ToString();
             if (transitions.ContainsKey(Key))
             {
                 current.onExit.Invoke();
                 current = states[to.ToString()];
-                current.onEnter.Invoke();
+                ; current.onEnter.Invoke();
             }
         }
 
@@ -75,10 +85,10 @@ namespace CombatForms
         public State GetCurrentState()
         {
             return current;
-        }       
+        }
 
 
-        public bool Start(T state)
+        public bool Start(int state)
         {
             if (states.ContainsKey(state.ToString()))
             {

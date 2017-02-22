@@ -6,22 +6,23 @@ using System.Threading.Tasks;
 
 namespace CombatForms
 {
-    
+
     class Ninja : IDamageable, IDamage
     {
         private float attack;
         private float health;
         public float Attack
         {
-            get { return attack;}
+            get { return attack; }
             set { attack = value; }
         }
         public float Health
         {
             get { return health; }
             set { health = value; }
-            
-        }public Ninja() { }
+
+        }
+        public Ninja() { }
 
         public Ninja(float Health, float Attack, string name)
         {

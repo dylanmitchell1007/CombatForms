@@ -20,32 +20,29 @@ namespace CombatForms
             get { return m_ninjaIndex; }
             set { m_ninjaIndex = value; }
         }
-     
+
         public List<Ninja> NinjaList
         {
             get; set;
         }
-     
+
         public Ninja CurrentNinja
         {
             get { return m_currentNinja; }
             set { m_currentNinja = value; }
         }
 
-
-        private int roundnumber = 1;
         private int p1score;
-        private Player player;
         public Player Player
         {
             get;
             set;
         }
-        
+
         public int RoundNumber
         {
-            get { return roundnumber; }
-            set { roundnumber = value; }
+            get;
+            set;
         }
 
         public int P1Score
@@ -63,12 +60,13 @@ namespace CombatForms
         private static readonly Singleton instance = new Singleton();
         private Singleton()
         {
-          
+
         }
         public static Singleton Instance
         {
             get { return instance; }
 
         }
+        public Action UpdateHud;
     }
 }

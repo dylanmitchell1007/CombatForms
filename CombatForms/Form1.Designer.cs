@@ -68,9 +68,10 @@
             // richTextBox3
             // 
             this.richTextBox3.BackColor = System.Drawing.Color.Gray;
-            this.richTextBox3.Location = new System.Drawing.Point(216, 14);
+            this.richTextBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 42.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox3.Location = new System.Drawing.Point(198, 3);
             this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(49, 49);
+            this.richTextBox3.Size = new System.Drawing.Size(88, 69);
             this.richTextBox3.TabIndex = 2;
             this.richTextBox3.Text = "";
             this.richTextBox3.TextChanged += new System.EventHandler(this.richTextBox3_TextChanged);
@@ -152,7 +153,6 @@
             this.richTextBox4.Size = new System.Drawing.Size(180, 110);
             this.richTextBox4.TabIndex = 10;
             this.richTextBox4.Text = "";
-            this.richTextBox4.TextChanged += new System.EventHandler(this.richTextBox4_TextChanged);
             // 
             // richTextBox5
             // 
@@ -166,7 +166,6 @@
             this.richTextBox5.Size = new System.Drawing.Size(180, 108);
             this.richTextBox5.TabIndex = 11;
             this.richTextBox5.Text = "";
-            this.richTextBox5.TextChanged += new System.EventHandler(this.richTextBox5_TextChanged);
             // 
             // button5
             // 
@@ -243,7 +242,6 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(0, 13);
             this.label2.TabIndex = 19;
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -263,7 +261,6 @@
             this.richTextBox6.Size = new System.Drawing.Size(100, 28);
             this.richTextBox6.TabIndex = 21;
             this.richTextBox6.Text = "";
-            this.richTextBox6.TextChanged += new System.EventHandler(this.richTextBox6_TextChanged);
             // 
             // richTextBox7
             // 

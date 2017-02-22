@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CombatForms
 {
     class State
-    {        
+    {
         public State()
         { }
         public State(Enum e)
@@ -15,12 +15,16 @@ namespace CombatForms
             name = e.ToString();
             stateName = e;
         }
+        public int Id;
         public string name;
         public string Name
         {
-            get { return name; }            
+            get { return name; }
         }
         public Enum stateName;
+
+
+
 
         public Handler onEnter = null;
         public Handler onExit = null;

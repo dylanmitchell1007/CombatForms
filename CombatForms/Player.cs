@@ -25,7 +25,7 @@ namespace CombatForms
     {
         void GiveDamage(IDamageable something);
         //void Knife(IDamageable damage);
-        
+
 
     }
 
@@ -35,130 +35,72 @@ namespace CombatForms
     {
         public Player()
         {
-            healthPackdurability = 100;
-            knifedurability = 100;
+            HealthPackdurability = 100;
+            Knifedurability = 100;
         }
-        public Player(float Health, float Attack, float Lifes, string name, float score, float currentlevel)
+
+        public Player(float h, float a, float l, string n, float s, float cl)
         {
 
-            health = Health;
-            attack = Attack;
-            lifes = Lifes;
-            knifedurability = 100;
-            healthPackdurability = 100;
-            score = Score;
-            currentlevel = Currentlevel;
-
-            //attackboost = 100;
-
-
-
+            Health = h;
+            Attack = a;
+            NumLives = l;
+            Knifedurability = 100;
+            HealthPackdurability = 100;
+            Score = s;
+            Currentlevel = cl;
         }
+        public float Health { get; set; }
+        public int AttackBoost { get; set; }
+        public int Knifedurability { get; set; }
+        public int HealthPackdurability { get; set; }
+        public float NumLives { get; set; }
+        public float Attack { get; set; }
+        public float Score { get; set; }
+        public float Currentlevel { get; set; }
 
+        #region functions
 
-        private float lifes;
-        private float attack;
-        private float health;
-        private float score;
-        private float currentlevel;
-       
-        private int knifedurability;
-        private int healthPackdurability;
-     
-        public int attackboost
-        {
-            get { return attackboost; }
-            
-        }
-        public int Knifedurability
-        {
-            get { return knifedurability; }
-            set { knifedurability = value; }
-        }
-
-        public int HealthPackdurability
-        {
-            get { return healthPackdurability; }
-            set { healthPackdurability = value; }
-
-
-        }
-        public float Lifes
-        {
-            get { return lifes; }
-            set { lifes = value; }
-        }
-
-        
-
-        public float Attack
-        {
-            get { return attack; }
-            set { attack = value; }
-        }
-        public float Health
-        {
-            get { return health; }
-            set { health = value; }
-        }
-      
-        
-        public float Score
-        {
-            get{ return Singleton.Instance.P1Score; }
-            set{ score = value; }
-        }
-        public float Currentlevel
-        {
-            get { return currentlevel; }
-            set { currentlevel = Currentlevel; }
-        }
-
-        
-      
 
         public void TakeDamage(float damage)
         {
-            health -= damage;
-            if(health<= 0)
+            Health -= damage;
+            if (Health <= 0)
             {
-                lifes--;
-                health = 100;
+                NumLives--;
+                Health = 100;
 
-             }
-            if(lifes<= 0)
+            }
+            if (NumLives <= 0)
             {
                 Console.WriteLine("YOU LOSE");
             }
         }
-        public void AttackBoost(IDamageable Aboost)
+        public void BuffAttack(IDamageable ab)
         {
-            Aboost.Health -= 8;
-            Aboost.TakeDamage(attack);
+            ab.Health -= 8;
+            ab.TakeDamage(Attack);
         }
-        public void HealthPack(IDamageable GetsHealth)
+        public void HealthPack(IDamageable gh)
         {
-            GetsHealth.Health += 50;
-            healthPackdurability -= 50;            
+            gh.Health += 50;
+            HealthPackdurability -= 50;
         }
-        public void Knife(IDamageable damage)
+        public void Knife(IDamageable d)
         {
-            
-            knifedurability -= 5;
-            damage.TakeDamage(attack);
+            Knifedurability -= 5;
+            d.TakeDamage(Attack);
         }
-     
         public void GiveDamage(IDamageable something)
         {
-            
-            something.TakeDamage(attack);
+            something.TakeDamage(Attack);
         }
-      
-    }
-    
+
+        #endregion functions
+
         public delegate void OnDamaged<T>(T p);
     }
-
+}
 
 
 
