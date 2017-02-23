@@ -48,10 +48,15 @@ namespace CombatForms
             Singleton.Instance.GSM.Start(1);
             InitHud();
             RoundLevel();
-
+           
             UpdateHud();
 
 
+
+ 
+       }
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
         }
         void InitHud()
@@ -252,7 +257,7 @@ namespace CombatForms
 
             }
             //p1.HealthPack(p1);
-            Singleton.Instance.Player.Health = 100;
+            Singleton.Instance.Player.Health += 100;
             ////p1.Health++;       
             if (Singleton.Instance.Player.HealthPackdurability <= 0)
             {
@@ -307,5 +312,7 @@ namespace CombatForms
         {
 
         }
+
+       
     }
 }

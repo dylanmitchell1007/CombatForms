@@ -14,7 +14,7 @@ namespace CombatForms
         public static void Serialize(string fileName, T data)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
-            TextWriter writer = new StreamWriter("C: \\Users\\dylan.mitchell\\Documents\\Visual Studio 2015\\Projects\\CombatForms\\CombatForms\\SaveGames\\" + fileName);
+            TextWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + "/" + fileName + ".xml");           
             serializer.Serialize(writer, data);
 
 
@@ -27,7 +27,7 @@ namespace CombatForms
         {
             T data;
             XmlSerializer serializer = new XmlSerializer(typeof(T));
-            TextReader reader = new StreamReader("C: \\Users\\dylan.mitchell\\Documents\\Visual Studio 2015\\Projects\\CombatForms\\CombatForms\\SaveGames\\" + fileName);
+            TextReader reader = new StreamReader(Directory.GetCurrentDirectory() + "/" + fileName + ".xml");
             data = (T)serializer.Deserialize(reader);
             reader.Close();
             return data;
